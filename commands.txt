@@ -1,0 +1,3 @@
+mix ecto.create
+mix phx.gen.schema Topic topic title:string
+mix ecto.migrate
