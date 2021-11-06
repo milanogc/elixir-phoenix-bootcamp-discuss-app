@@ -1,3 +1,8 @@
 mix ecto.create
 mix phx.gen.schema Topic topic title:string
 mix ecto.migrate
+mix phx.gen.schema User user email:string provider:string token:string
+mix ecto.migrate
+
+source .env
+mix phx.server
