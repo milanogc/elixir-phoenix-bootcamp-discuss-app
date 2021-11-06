@@ -6,3 +6,5 @@ mix ecto.migrate
 
 source .env
 mix phx.server
+
+mix ecto.gen.migration add_user_id_to_topic
