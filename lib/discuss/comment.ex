@@ -1,14 +1,16 @@
 # mix phx.gen.schema Topic topic title:string
 # mix ecto.migrate
 
-defmodule Discuss.Topic do
+defmodule Discuss.Comment do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "topic" do
-    field :title, :string
+  @derive {Jason.Encoder, only: [:content, :user]}
+
+  schema "comment" do
+    field :content, :string
     belongs_to :user, Discuss.User
-    has_many :comments, Discuss.Comment
+    belongs_to :topic, Discuss.Topic
 
     timestamps()
   end
@@ -16,7 +18,7 @@ defmodule Discuss.Topic do
   @doc false
   def changeset(topic, attrs \\ %{}) do
     topic
-    |> cast(attrs, [:title])
-    |> validate_required([:title])
+    |> cast(attrs, [:content])
+    |> validate_required([:content])
   end
 end

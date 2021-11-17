@@ -2,11 +2,14 @@ defmodule Discuss.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Jason.Encoder, only: [:email]}
+
   schema "user" do
     field :email, :string
     field :provider, :string
     field :token, :string
     has_many :topics, Discuss.Topic
+    has_many :comment, Discuss.Comment
 
     timestamps()
   end
@@ -15,6 +18,6 @@ defmodule Discuss.User do
   def changeset(user, attrs \\ %{}) do
     user
     |> cast(attrs, [:email, :provider, :token])
-    |> validate_required([:provider, :token])
+    |> validate_required([:email, :provider, :token])
   end
 end
